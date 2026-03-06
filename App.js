@@ -1,64 +1,45 @@
-import { useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import { Pressable, View } from 'react-native';
 import { Button, Image, Text, TextInput } from 'react-native-web';
+import CadasterPage from './components/CadasterPage';
+import LoginPage from './components/LoginPage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App() {
 
-  const [isCadaster, setIsCadaster] = useState(false)
+  const [isCadaster, setIsCadaster] = useState(true)
+  const [email, setEmail] = useState('')
+  const [passw, setPassw] = useState('')
+  const [secPassw, setSecPassw] = useState('')
+
+  
 
   return (
     <View style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
 
       {(isCadaster) &&
 
-        <View style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
-
-          <Text style={{ fontWeight: 'bold', fontSize: 30 }}>Cadastro</Text>
-
-          <Image source={require('./assets/user.png')} style={{ width: 130, height: 130, marginVertical: 20 }} />
-
-          <Text>Digite seu email:</Text>
-          <TextInput style={{ border: 'solid 2px black', borderRadius: 5, padding: 2 }} />
-
-          <Text>Digite sua senha:</Text>
-          <TextInput style={{ border: 'solid 2px black', borderRadius: 5, padding: 2 }} />
-
-          <Text>Digite seu senha de novo:</Text>
-          <TextInput style={{ border: 'solid 2px black', borderRadius: 5, padding: 2 }} />
-
-          <Pressable style={{ backgroundColor: 'skyblue', paddingVertical: 8, paddingHorizontal: 40, marginTop: 20, borderRadius: 6 }}>
-            <Text style={{ color: 'white', fontWeight: 'bold' }}>Cadastrar</Text>
-          </Pressable>
-
-          <Text style={{ marginTop: 10 }}>Já tem uma conta? <Button title='logar' /></Text>
-
-        </View>
+        <CadasterPage 
+          setIsCadaster={setIsCadaster}
+          setEmail={setEmail}
+          setPassw={setPassw}
+          setSecPassw={setSecPassw}
+          email={email}
+          passw={passw}
+          secPassw={secPassw}
+        />
 
       }
 
       {(!isCadaster) &&
 
-        <View style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
-
-          <Text style={{ fontWeight: 'bold', fontSize: 30 }}>Login</Text>
-
-          <Image source={require('./assets/user.png')} style={{ width: 130, height: 130, marginVertical: 20 }} />
-
-          <Text>Digite seu email:</Text>
-          <TextInput style={{ border: 'solid 2px black', borderRadius: 5, padding: 2 }} />
-
-          <Text>Digite sua senha:</Text>
-          <TextInput style={{ border: 'solid 2px black', borderRadius: 5, padding: 2 }} />
-
-          <Pressable style={{ backgroundColor: 'skyblue', paddingVertical: 8, paddingHorizontal: 40, marginTop: 20, borderRadius: 6 }}>
-            <Text style={{ color: 'white', fontWeight: 'bold' }}>Logar</Text>
-          </Pressable>
-
-          <Text style={{ marginTop: 10 }}>Não tem uma conta? <Button title='Cadastrar' /></Text>
-
-        </View>
+        <LoginPage 
+          setIsCadaster={setIsCadaster}
+        />
 
       }
+
+      
 
 
     </View>
