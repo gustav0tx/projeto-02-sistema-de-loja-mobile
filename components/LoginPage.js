@@ -1,13 +1,15 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Pressable, View } from 'react-native';
 import { Button, Image, Text, TextInput } from 'react-native-web';
+import handleLogin from '../hooks/login/handleLogin';
 
-export default function LoginPage({ setIsCadaster, setEmail, setPassw }) {
+export default function LoginPage({ setPages, setEmail, setPassw, email, passw }) {
     return (
         <View style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
 
           <Text style={{ fontWeight: 'bold', fontSize: 30 }}>Login</Text>
 
-          <Image source={require('./assets/user.png')} style={{ width: 130, height: 130, marginVertical: 20 }} />
+          <Image source={require('../assets/user.png')} style={{ width: 130, height: 130, marginVertical: 20 }} />
 
           <Text>Digite seu email:</Text>
           <TextInput style={{ border: 'solid 2px black', borderRadius: 5, padding: 2 }} onChangeText={(newText) => {setEmail(newText)}} />
@@ -15,11 +17,19 @@ export default function LoginPage({ setIsCadaster, setEmail, setPassw }) {
           <Text>Digite sua senha:</Text>
           <TextInput style={{ border: 'solid 2px black', borderRadius: 5, padding: 2 }} onChangeText={(newText) => {setPassw(newText)}} />
 
-          <Pressable style={{ backgroundColor: 'skyblue', paddingVertical: 8, paddingHorizontal: 40, marginTop: 20, borderRadius: 6 }}>
+          <Pressable 
+            style={{ backgroundColor: 'darkblue', paddingVertical: 8, paddingHorizontal: 40, marginTop: 20, borderRadius: 6 }}
+            onPress={() => {handleLogin(email, passw, setPages)}}
+          >
             <Text style={{ color: 'white', fontWeight: 'bold' }}>Logar</Text>
           </Pressable>
 
-          <Text style={{ marginTop: 10 }}>Não tem uma conta? <Button title='Cadastrar' onPress={() => {setIsCadaster(true)}} /></Text>
+          <Text style={{ marginTop: 10 }}>Não tem uma conta?</Text>
+
+          <Button title='Cadastrar' onPress={() => {setPages(0)}} />
+
+          <Button title='ver' onPress={() => {console.log(AsyncStorage.getAllKeys())}} />
+          <Button title='delete' onPress={() => {AsyncStorage.removeItem('123guga')}} />
 
         </View>
     )

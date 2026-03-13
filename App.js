@@ -1,26 +1,32 @@
-import { use, useEffect, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { Pressable, View } from 'react-native';
 import { Button, Image, Text, TextInput } from 'react-native-web';
 import CadasterPage from './components/CadasterPage';
 import LoginPage from './components/LoginPage';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AdminProducts from './components/AdminProductsPage';
 
-export default function App() {
+export default function App() { 
 
-  const [isCadaster, setIsCadaster] = useState(true)
   const [email, setEmail] = useState('')
   const [passw, setPassw] = useState('')
   const [secPassw, setSecPassw] = useState('')
+  const [pages, setPages] = useState(2)
+  const [productsList, setProductsList] = useState([])
 
+  useEffect(() => {
+
+
+
+  }, [pages])
   
 
   return (
     <View style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
 
-      {(isCadaster) &&
+      {(pages == 0) &&
 
         <CadasterPage 
-          setIsCadaster={setIsCadaster}
+          setPages={setPages}
           setEmail={setEmail}
           setPassw={setPassw}
           setSecPassw={setSecPassw}
@@ -31,16 +37,33 @@ export default function App() {
 
       }
 
-      {(!isCadaster) &&
+      {(pages == 1) &&
 
-        <LoginPage 
-          setIsCadaster={setIsCadaster}
+        <LoginPage
+          setPages={setPages} 
+          setEmail={setEmail}
+          setPassw={setPassw}
+          email={email}
+          passw={passw}
         />
 
       }
 
+      {(pages == 2) &&
       
+        <AdminProducts 
+          productsList={productsList}
+          setProductList={setProductsList}
+          p
+        />
 
+      }
+
+      {(pages == 3) &&
+      
+        <View><Text>oi</Text></View>
+
+      }
 
     </View>
   )
