@@ -1,9 +1,10 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, use } from 'react';
 import { Pressable, View } from 'react-native';
 import { Button, Image, Text, TextInput } from 'react-native-web';
 import CadasterPage from './components/CadasterPage';
 import LoginPage from './components/LoginPage';
 import AdminProducts from './components/AdminProductsPage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App() { 
 
@@ -11,11 +12,33 @@ export default function App() {
   const [passw, setPassw] = useState('')
   const [secPassw, setSecPassw] = useState('')
   const [pages, setPages] = useState(2)
-  const [productsList, setProductsList] = useState([])
+  const [productsList, setProductsList] = useState([{ name: 'cafe', description: 'é legal', price: 2, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtXZe8qQD9rfry3D75GyIFcGHdcvjamBbZkVm4z1ggOauJ_GP4GHkMkTD7d-8&s', id: 0  }, { name: 'praia', description: 'muito boa asodiaosdhaosdihaoshdaoishdoahs  ', price: 20, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfgIg20Hu38MgqDWoMy67cPpRGhD8Hmn8L0J-_uQre4hICYJ5q2TjK97OmiQ&s' }])
 
   useEffect(() => {
 
+    const updateProductList =  async () => {
 
+      const objList = { list: productsList }
+
+      await AsyncStorage.setItem('productList', JSON.parse(objList))
+
+    }
+
+    updateProductList()
+
+  }, [productsList])
+
+  useEffect(() => {
+
+    const getUpdatedList = async () => {
+
+      const updatedList = JSON.stringify(await AsyncStorage.getItem('productList'))
+
+      setProductsList(updatedList.list)
+
+    }
+
+    getUpdatedList()
 
   }, [pages])
   
@@ -54,7 +77,7 @@ export default function App() {
         <AdminProducts 
           productsList={productsList}
           setProductList={setProductsList}
-          p
+          setPages={setPages}
         />
 
       }
