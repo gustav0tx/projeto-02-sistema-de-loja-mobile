@@ -28,9 +28,6 @@ export default function LoginPage({ setPages, setEmail, setPassw, email, passw }
 
           <Button title='Cadastrar' onPress={() => {setPages(0)}} />
 
-          <Button title='ver' onPress={() => {console.log(AsyncStorage.getAllKeys())}} />
-          <Button title='delete' onPress={() => {AsyncStorage.removeItem('123guga')}} />
-
         </View>
     )
 }
