@@ -6,7 +6,7 @@ import clientBuy from '../hooks/client/clientBuy';
 
 export default function ClientCart({ cart, setCart, setPages }) {
     return (
-        <View>
+        <View style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
 
             <Text style={{ fontWeight: 'bold', fontSize: 24 }}>Carrinho</Text>
 
@@ -15,7 +15,7 @@ export default function ClientCart({ cart, setCart, setPages }) {
                 horizontal={true}
                 style={{ flexGrow: 0, marginBottom: 20 }}
                 renderItem={({ item }) => (
-                    <View style={{ padding: 20, backgroundColor: 'lightgray', borderRadius: 10, marginRight: 15, display: 'flex', maxWidth: 160, }}>
+                    <View style={{ padding: 20, backgroundColor: 'lightgray', borderRadius: 10, marginRight: 15, display: 'flex', maxWidth: 160 }}>
 
                         <Image source={{ uri: item.img }} style={{ width: 120, height: 160, borderRadius: 10, marginBottom: 10 }} />
 

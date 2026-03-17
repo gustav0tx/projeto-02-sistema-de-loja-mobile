@@ -6,17 +6,26 @@ import AdminProducts from './components/AdminProductsPage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ClientProductsPage from './components/ClientProductsPage';
 import ClientCart from './components/ClientCart';
+import saveInStorage from './hooks/admin/saveProductsInStorage';
 
 export default function App() { 
 
   const [email, setEmail] = useState('')
   const [passw, setPassw] = useState('')
   const [secPassw, setSecPassw] = useState('')
-  const [pages, setPages] = useState(3)
+  const [pages, setPages] = useState(0)
   const [cart, setCart] = useState([])
-  const [productsList, setProductsList] = useState([{ name: 'cafe', description: 'é legal', price: 2, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtXZe8qQD9rfry3D75GyIFcGHdcvjamBbZkVm4z1ggOauJ_GP4GHkMkTD7d-8&s', id: 0  }, { name: 'praia', description: 'muito boa asodiaosdhaosdihaoshdaoishdoahs  ', price: 20, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfgIg20Hu38MgqDWoMy67cPpRGhD8Hmn8L0J-_uQre4hICYJ5q2TjK97OmiQ&s', id: 1 }])
+  const [productsList, setProductsList] = useState([])
 
-  
+  useEffect(() => {
+
+    saveProductsInStorage()
+
+    return () => {
+
+    }
+
+  }, [productsList])
 
   return (
     <View style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
@@ -63,6 +72,8 @@ export default function App() {
           productsList={productsList}
           setProductsList={setProductsList}
           setPages={setPages}
+          cart={cart}
+          setCart={setCart}
         />
 
       }
@@ -73,6 +84,7 @@ export default function App() {
           cart={cart}
           setCart={setCart}
           setPages={setPages}
+          productList={productsList}
         />
 
       }

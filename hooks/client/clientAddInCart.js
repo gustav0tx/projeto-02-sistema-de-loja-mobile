@@ -1,9 +1,9 @@
 const clientAddInCart = (productId, productsList, setCart, cart) => {
 
-    const filteredProducts = productsList.filter(p => p.id == productId)
+    const productAdd = productsList.find(p => p.id == productId)
 
+    setCart([...cart, productAdd])
 
-    setCart([...cart, ...filteredProducts])
 }
 
 export default clientAddInCart
