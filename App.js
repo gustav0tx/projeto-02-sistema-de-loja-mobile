@@ -1,12 +1,14 @@
-import { useRef, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import CadasterPage from './components/CadasterPage';
 import LoginPage from './components/LoginPage';
 import AdminProducts from './components/AdminProductsPage';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import ClientProductsPage from './components/ClientProductsPage';
 import ClientCart from './components/ClientCart';
-import saveInStorage from './hooks/admin/saveProductsInStorage';
+import saveProductsInStorage from './hooks/admin/saveProductsInStorage';
+import updateProducts from './hooks/admin/updateProducts';
+import { Button } from 'react-native-web';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App() { 
 
@@ -19,13 +21,15 @@ export default function App() {
 
   useEffect(() => {
 
-    saveProductsInStorage()
-
-    return () => {
-
-    }
+    saveProductsInStorage(productsList)
 
   }, [productsList])
+
+  useEffect(() => {
+
+    updateProducts(setProductsList)
+
+  }, [pages])
 
   return (
     <View style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
@@ -43,6 +47,8 @@ export default function App() {
         />
 
       }
+
+      <Button title='ver' onPress={ async () => {console.log(await AsyncStorage.getAllKeys())}} />
 
       {(pages == 1) &&
 
