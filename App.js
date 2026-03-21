@@ -48,8 +48,6 @@ export default function App() {
 
       }
 
-      <Button title='ver' onPress={ async () => {console.log(await AsyncStorage.getAllKeys())}} />
-
       {(pages == 1) &&
 
         <LoginPage

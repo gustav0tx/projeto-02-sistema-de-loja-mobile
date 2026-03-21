@@ -14,10 +14,10 @@ export default function CadasterPage({ setPages, setEmail, setPassw, setSecPassw
             <TextInput style={{ border: 'solid 2px black', borderRadius: 5, padding: 2 }} onChangeText={(newText) => {setEmail(newText)}} />
 
             <Text>Digite sua senha:</Text>
-            <TextInput style={{ border: 'solid 2px black', borderRadius: 5, padding: 2 }} onChangeText={(newText) => {setPassw(newText)}} />
+            <TextInput secureTextEntry={true} style={{ border: 'solid 2px black', borderRadius: 5, padding: 2 }} onChangeText={(newText) => {setPassw(newText)}} />
 
             <Text>Digite seu senha de novo:</Text>
-            <TextInput style={{ border: 'solid 2px black', borderRadius: 5, padding: 2 }} onChangeText={(newText) => {setSecPassw(newText)}}/>
+            <TextInput secureTextEntry={true} style={{ border: 'solid 2px black', borderRadius: 5, padding: 2 }} onChangeText={(newText) => {setSecPassw(newText)}}/>
 
             <Pressable 
                 style={{ backgroundColor: 'darkblue', paddingVertical: 8, paddingHorizontal: 40, marginTop: 20, borderRadius: 6 }}

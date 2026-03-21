@@ -15,7 +15,7 @@ export default function LoginPage({ setPages, setEmail, setPassw, email, passw }
           <TextInput style={{ border: 'solid 2px black', borderRadius: 5, padding: 2 }} onChangeText={(newText) => {setEmail(newText)}} />
 
           <Text>Digite sua senha:</Text>
-          <TextInput style={{ border: 'solid 2px black', borderRadius: 5, padding: 2 }} onChangeText={(newText) => {setPassw(newText)}} />
+          <TextInput secureTextEntry={true} style={{ border: 'solid 2px black', borderRadius: 5, padding: 2 }} onChangeText={(newText) => {setPassw(newText)}} />
 
           <Pressable 
             style={{ backgroundColor: 'darkblue', paddingVertical: 8, paddingHorizontal: 40, marginTop: 20, borderRadius: 6 }}
